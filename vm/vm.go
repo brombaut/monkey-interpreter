@@ -77,10 +77,8 @@ func (vm *VM) Run() error {
 		ins = vm.currentFrame().Instructions()
 		op = code.Opcode(ins[ip])
 
-		fmt.Printf("ip=%d inslen=%d ins=%q \n", ip, len(ins), ins[ip])
 		switch op {
 		case code.OpConstant:
-			fmt.Println("OpConstant")
 			constIndex := code.ReadUint16(ins[ip+1:])
 			vm.currentFrame().ip += 2
 
@@ -90,11 +88,9 @@ func (vm *VM) Run() error {
 			}
 
 		case code.OpPop:
-			fmt.Println("OpPop")
 			vm.pop()
 
 		case code.OpAdd, code.OpSub, code.OpMul, code.OpDiv:
-			fmt.Println("OpAdd")
 			err := vm.executeBinaryOperation(op)
 			if err != nil {
 				return err
@@ -150,14 +146,12 @@ func (vm *VM) Run() error {
 			}
 
 		case code.OpSetGlobal:
-			fmt.Println("OpSetGlobal")
 			globalIndex := code.ReadUint16(ins[ip+1:])
 			vm.currentFrame().ip += 2
 
 			vm.globals[globalIndex] = vm.pop()
 
 		case code.OpGetGlobal:
-			fmt.Println("OpGetGlobal")
 			globalIndex := code.ReadUint16(ins[ip+1:])
 			vm.currentFrame().ip += 2
 
@@ -203,7 +197,6 @@ func (vm *VM) Run() error {
 			}
 
 		case code.OpCall:
-			fmt.Println("OpCall")
 			fn, ok := vm.stack[vm.sp-1].(*object.CompiledFunction)
 			if !ok {
 				return fmt.Errorf("calling non-function")
@@ -212,9 +205,7 @@ func (vm *VM) Run() error {
 			vm.pushFrame(frame)
 
 		case code.OpReturnValue:
-			fmt.Println("OpReturnValue")
 			returnValue := vm.pop()
-			fmt.Printf("returnValue=%d\n", returnValue.(*object.Integer).Value)
 			vm.popFrame()
 			vm.pop()
 			err := vm.push(returnValue)

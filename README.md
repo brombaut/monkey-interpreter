@@ -78,12 +78,12 @@ let arrayWithValues = [1 + 1, 2 * 2, 3];
 // Define a `fibonacci` function
 let fibonacci = fn(x) {
   if (x == 0) {
-    0                /* Monkey supports implicit returning of values */
+    0                // Monkey supports implicit returning of values
   } else {
     if (x == 1) {
-      return 1;      /* ... and explicit return statements */
+      return 1;      // ... and explicit return statements
     } else {
-      fibonacci(x - 1) + fibonacci(x - 2); /* Recursion */
+      fibonacci(x - 1) + fibonacci(x - 2); // Recursion
     }
   }
 };
@@ -91,25 +91,27 @@ let fibonacci = fn(x) {
 
 ### Monkey supports any combination of the following data types: booleans, strings, hashes, integers and arrays.
 ```JavaScript
-/* Here is an array containing two hashes, that use strings as keys and integers and strings as values */
+// Here is an array containing two hashes, that use strings as keys 
+// and integers and strings as values
 let people = [{"name": "Anna", "age": 24}, {"name": "Bob", "age": 99}];
 
-/* Getting elements out of the data types is also supported. */
-/* Here is how we can access array elements by using index expressions: */
+// Getting elements out of the data types is also supported.
+// Here is how we can access array elements by using index expressions:
 fibonacci(myArray[4]);
 // => 5
 
-/* We can also access hash elements with index expressions: */
+// We can also access hash elements with index expressions: 
 let getName = fn(person) { person["name"]; };
 
-/* And here we access array elements and call a function with the element as argument: */
+// And here we access array elements and call a function with the element as argument: 
 getName(people[0]); // => "Anna"
 getName(people[1]); // => "Bob"
 ```
 
 ### Functions are first-class citizens, and higher-order functions are supported.
 ```JavaScript
-/* Define the higher-order function `map`, that calls the given function `f` on each element in `arr` and returns an array of the produced values. */
+// Define the higher-order function `map`, that calls the given function `f` on 
+// each element in `arr` and returns an array of the produced values. 
 let map = fn(arr, f) {
   let iter = fn(arr, accumulated) {
     if (len(arr) == 0) {
@@ -122,13 +124,14 @@ let map = fn(arr, f) {
   iter(arr, []);
 };
 
-/* Now let's take the `people` array and the `getName` function from above and use them with `map`. */
+// Now let's take the `people` array and the `getName` function from above 
+// and use them with `map`.
 map(people, getName); // => ["Anna", "Bob"]
 ```
 
 ### Monkey supports closures.
 ```JavaScript
-/* newGreeter returns a new function, that greets a `name` with the given 'greeting`. */
+// newGreeter returns a new function, that greets a `name` with the given 'greeting`.
 let newGreeter = fn(greeting) {
   // `puts` is a built-in function we add to the interpreter
   return fn(name) { puts(greeting + " " + name); }

@@ -1,5 +1,5 @@
 # Monkey Interpreter & Compiler/Virtual Machine
-Result of reading "Writing An Interpreter In Go" and the sequal "Writing A Compiler In Go" by Thorsten Bell.
+Result of reading "Writing An Interpreter In Go" and the sequel "Writing A Compiler In Go" by Thorsten Bell.
 
 ## Run Interpreter REPL
 ```
